@@ -1,3 +1,4 @@
+import path from "path";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 
 const config: PostgresConnectionOptions = {
@@ -9,7 +10,7 @@ const config: PostgresConnectionOptions = {
     database: 'nest',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: false,
-    migrations: [__dirname + '/migrations/**/*.{.ts,.js}']
+    migrations: [__dirname + './migrations/**/*.{.ts,.js}']
 };
 
 export default config;
