@@ -5,6 +5,7 @@ import { DeleteResult, Repository } from "typeorm";
 import { UserEntity } from "@app/user/user.entity";
 import { ArticleResponseInterface } from "./types/articleResponse.interface";
 import slugify from "slugify";
+import { PersistArticleDto } from "./dto/persistArticle.dto";
 
 @Injectable()
 export class ArticleService{
@@ -13,7 +14,7 @@ export class ArticleService{
         private readonly articleRepository: Repository<ArticleEntity>,
     ) {}
     
-    async createArticle(currentUser: UserEntity, createArticleDto): Promise<ArticleEntity>{
+    async createArticle(currentUser: UserEntity, createArticleDto: PersistArticleDto): Promise<ArticleEntity>{
         
         const article = new ArticleEntity();
         Object.assign(article, createArticleDto);
@@ -36,6 +37,27 @@ export class ArticleService{
         }
 
         return article;
+    }
+
+    async updateArticle(
+        slug: string,
+        updateArticleDto: PersistArticleDto,
+        currentUserId: number
+    ): Promise<ArticleEntity>{
+
+        const article = await this.findBySlug(slug);
+
+        if (!article){
+            throw new HttpException('Article not found', HttpStatus.NOT_FOUND)
+        }
+
+        if(article.author.id !== currentUserId){
+            throw new HttpException('You are not an author', HttpStatus.FORBIDDEN);
+        }
+
+        Object.assign(article, updateArticleDto);
+
+        return await this.articleRepository.save(article);
     }
 
     async deleteArticle(slug: string, currentUserId: number): Promise<DeleteResult> {
