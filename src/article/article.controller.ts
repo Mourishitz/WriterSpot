@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, UseGuards } from "@nestjs/common";
 import { ArticleService } from "@app/article/article.service";
 import { AuthGuard } from "@app/user/guards/auth.guard";
 import { User } from "@app/user/decorators/user.decorator";
@@ -20,4 +20,12 @@ export class ArticleController{
 
         return this.articleService.buildArticleResponse(article);
     }
+
+    @Get(':slug')
+    async getSingleArticle(@Param('slug') slug: string): Promise<ArticleResponseInterface>{
+        
+        const article = await this.articleService.findBySlug(slug);
+        
+        return this.articleService.buildArticleResponse(article);
+    }    
 }
