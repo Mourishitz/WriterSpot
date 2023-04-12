@@ -1,8 +1,8 @@
-import ormconfig from "@app/ormconfig";
+import ormconfig from '@app/ormconfig';
 
 const ormseedconfig = {
-    ...ormconfig,
-    migrations: ['src/seeds/*.ts']
-}
+  ...ormconfig,
+  migrations: ['src/seeds/*.ts'],
+};
 
-export default ormseedconfig
+export default ormseedconfig;
