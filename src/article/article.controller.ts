@@ -14,10 +14,10 @@ import {
 import { ArticleService } from '@app/article/article.service';
 import { AuthGuard } from '@app/user/guards/auth.guard';
 import { User } from '@app/user/decorators/user.decorator';
-import { PersistArticleDto } from './dto/persistArticle.dto';
+import { PersistArticleDto } from '@app/article/dto/persistArticle.dto';
 import { UserEntity } from '@app/user/user.entity';
 import { ArticleResponseInterface } from '@app/article/types/articleResponse.interface';
-import { ArticlesResponseInterface } from './types/articlesResponse.interface';
+import { ArticlesResponseInterface } from '@app/article/types/articlesResponse.interface';
 
 @Controller('articles')
 export class ArticleController {
