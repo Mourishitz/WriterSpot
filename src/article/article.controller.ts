@@ -18,6 +18,7 @@ import { PersistArticleDto } from '@app/article/dto/persistArticle.dto';
 import { UserEntity } from '@app/user/user.entity';
 import { ArticleResponseInterface } from '@app/article/types/articleResponse.interface';
 import { ArticlesResponseInterface } from '@app/article/types/articlesResponse.interface';
+import { DeleteResult } from 'typeorm';
 
 @Controller('articles')
 export class ArticleController {
@@ -77,7 +78,29 @@ export class ArticleController {
   async deleteArticle(
     @User('id') currentUserId: number,
     @Param('slug') slug: string,
-  ): Promise<any> {
+  ): Promise<DeleteResult> {
     return await this.articleService.deleteArticle(slug, currentUserId);
+  }
+
+  @Post(':slug/favorite')
+  @UseGuards(AuthGuard)
+  async addArticleToFavorites(
+    @User('id') currentUserId: number,
+    @Param('slug') slug: string
+  ): Promise<ArticleResponseInterface>{
+    const article = await this.articleService.addArticleToFavorites(slug, currentUserId);
+
+    return this.articleService.buildArticleResponse(article);
+  }
+
+  @Delete(':slug/favorite')
+  @UseGuards(AuthGuard)
+  async removeArticleFromFavorites(
+    @User('id') currentUserId: number,
+    @Param('slug') slug: string
+  ): Promise<ArticleResponseInterface>{
+    const article = await this.articleService.removeArticleFromFavorites(slug, currentUserId);
+
+    return this.articleService.buildArticleResponse(article);
   }
 }
