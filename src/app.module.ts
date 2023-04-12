@@ -13,7 +13,7 @@ import { ArticleModule } from '@app/article/article.module';
     TypeOrmModule.forRoot(ormconfig),
     TagModule,
     UserModule,
-    ArticleModule
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -22,7 +22,7 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(AuthMiddleware).forRoutes({
       path: '*',
-      method: RequestMethod.ALL
-    })
+      method: RequestMethod.ALL,
+    });
   }
 }
