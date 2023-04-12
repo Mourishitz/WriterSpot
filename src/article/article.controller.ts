@@ -5,7 +5,7 @@ import { User } from "@app/user/decorators/user.decorator";
 import { PersistArticleDto } from "./dto/persistArticle.dto";
 import { UserEntity } from "@app/user/user.entity";
 import { ArticleResponseInterface } from "@app/article/types/articleResponse.interface";
-import { ArticleEntity } from "./article.entity";
+import { ArticlesResponseInterface } from "./types/articlesResponse.interface";
 
 @Controller('articles')
 export class ArticleController{
@@ -15,7 +15,9 @@ export class ArticleController{
     async findAll(
         @User('id') currentUserId: number,
         @Query() query: any
-    ){}
+    ): Promise<ArticlesResponseInterface> {
+        return await this.articleService.findAll(currentUserId, query)
+    }
 
     @Post()
     @UseGuards(AuthGuard)
