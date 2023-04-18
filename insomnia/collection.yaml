@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2023-04-18T14:26:02.197Z
+__export_date: 2023-04-18T14:46:22.015Z
 __export_source: insomnia.desktop.app:v2023.1.0
 resources:
   - _id: req_e89dada37f5f41f799c7888e10086725
@@ -566,9 +566,9 @@ resources:
     _type: request_group
   - _id: req_25508f0ddad440f49626b33150588f61
     parentId: fld_afb5dabb72f1408fb60c95dafec3d9fd
-    modified: 1681818023653
+    modified: 1681829098625
     created: 1681817941758
-    url: "{{ _.baseUrl}}/profiles/Bob"
+    url: "{{ _.baseUrl}}/profiles/Tiffany"
     name: Get Profile
     description: ""
     method: GET
@@ -619,6 +619,34 @@ resources:
       token: "{% response 'body', 'req_e89dada37f5f41f799c7888e10086725',
         'b64::JC51c2VyLnRva2Vu::46b', 'never', 60 %}"
     metaSortKey: -1681612386302.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0eee983cd8a24e12a8c6f81a5465e6a5
+    parentId: fld_afb5dabb72f1408fb60c95dafec3d9fd
+    modified: 1681828939732
+    created: 1681828937923
+    url: "{{ _.baseUrl}}/profiles/Tiffany/follow"
+    name: Unfollow Profile 🔒
+    description: ""
+    method: DELETE
+    body: {}
+    parameters:
+      - id: pair_a1b8b48fb0cc4fe98c00643c3949974e
+        name: ""
+        value: ""
+        description: ""
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_e89dada37f5f41f799c7888e10086725',
+        'b64::JC51c2VyLnRva2Vu::46b', 'never', 60 %}"
+    metaSortKey: -1681510138545.75
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
