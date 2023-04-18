@@ -105,7 +105,7 @@ export class ArticleService {
     const follows = await this.followRepository.find({
       where: {
         followerId: currentUserId,
-      }
+      },
     });
 
     if (follows.length === 0) {
@@ -113,7 +113,8 @@ export class ArticleService {
     }
 
     const followingUserIds = follows.map((follow) => follow.followingId);
-    const queryBuilder = this.dataSource.getRepository(ArticleEntity)
+    const queryBuilder = this.dataSource
+      .getRepository(ArticleEntity)
       .createQueryBuilder('articles')
       .leftJoinAndSelect('articles.author', 'author')
       .where('articles.authorId IN (:...ids)', { ids: followingUserIds });

@@ -36,7 +36,7 @@ export class ArticleController {
   @UseGuards(AuthGuard)
   async getFeed(
     @User('id') currentUserId: number,
-    @Query() query: any 
+    @Query() query: any,
   ): Promise<ArticlesResponseInterface> {
     return await this.articleService.getFeed(currentUserId, query);
   }
